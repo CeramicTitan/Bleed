@@ -1,0 +1,8 @@
+name: Bleed
+main: com.chasechocolate.bleed.Bleed
+version: ${project.version}
+description: >
+             Blood particles for pvp/pve.
+commands:
+  bleed:
+    description: Used to check the toggle status as well as toggle the plugin;
