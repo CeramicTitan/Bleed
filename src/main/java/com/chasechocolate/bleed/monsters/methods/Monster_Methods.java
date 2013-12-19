@@ -1,11 +1,17 @@
 package com.chasechocolate.bleed.monsters.methods;
 
+import java.util.regex.Pattern;
+
 import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
 import com.chasechocolate.bleed.Bleed;
+import com.chasechocolate.bleed.packets.Packet;
+import com.chasechocolate.bleed.packets.PlayerUtil;
 
 public class Monster_Methods {
 
@@ -17,9 +23,12 @@ public class Monster_Methods {
     public void horseEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.HORSE);
 	if (plugin.getConfig().getBoolean("player.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -30,9 +39,12 @@ public class Monster_Methods {
     public void playerEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.PLAYER);
 	if (plugin.getConfig().getBoolean("player.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -43,9 +55,12 @@ public class Monster_Methods {
     public void skeletonEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.SKELETON);
 	if (plugin.getConfig().getBoolean("skeleton.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -56,9 +71,12 @@ public class Monster_Methods {
     public void zombieEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.ZOMBIE);
 	if (plugin.getConfig().getBoolean("zombie.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -69,9 +87,12 @@ public class Monster_Methods {
     public void batEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.BAT);
 	if (plugin.getConfig().getBoolean("bat.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -82,9 +103,12 @@ public class Monster_Methods {
     public void creeperEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.CREEPER);
 	if (plugin.getConfig().getBoolean("creeper.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -95,9 +119,12 @@ public class Monster_Methods {
     public void endermanEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.ENDERMAN);
 	if (plugin.getConfig().getBoolean("enderman.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -108,8 +135,12 @@ public class Monster_Methods {
     public void blazeEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.BLAZE);
 	if (plugin.getConfig().getBoolean("blaze.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -120,9 +151,12 @@ public class Monster_Methods {
     public void slimeEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.SLIME);
 	if (plugin.getConfig().getBoolean("slime.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -133,9 +167,12 @@ public class Monster_Methods {
     public void cavespiderEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.CAVE_SPIDER);
 	if (plugin.getConfig().getBoolean("cavespider.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -146,9 +183,12 @@ public class Monster_Methods {
     public void spiderEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.SPIDER);
 	if (plugin.getConfig().getBoolean("spider.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -159,9 +199,12 @@ public class Monster_Methods {
     public void silverfishEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.SILVERFISH);
 	if (plugin.getConfig().getBoolean("silverfish.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -172,9 +215,12 @@ public class Monster_Methods {
     public void witchEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.WITCH);
 	if (plugin.getConfig().getBoolean("witch.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -185,9 +231,12 @@ public class Monster_Methods {
     public void wolfrEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.WOLF);
 	if (plugin.getConfig().getBoolean("wolf.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -198,9 +247,12 @@ public class Monster_Methods {
     public void witherbossEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.WITHER);
 	if (plugin.getConfig().getBoolean("wither.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -211,9 +263,12 @@ public class Monster_Methods {
     public void cowEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.COW);
 	if (plugin.getConfig().getBoolean("cow.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -224,9 +279,12 @@ public class Monster_Methods {
     public void chickenEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.CHICKEN);
 	if (plugin.getConfig().getBoolean("chicken.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -237,9 +295,12 @@ public class Monster_Methods {
     public void ocelotEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.OCELOT);
 	if (plugin.getConfig().getBoolean("ocelot.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -250,9 +311,12 @@ public class Monster_Methods {
     public void mooshroomEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.MUSHROOM_COW);
 	if (plugin.getConfig().getBoolean("mooshroom.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -263,9 +327,12 @@ public class Monster_Methods {
     public void squidEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.SQUID);
 	if (plugin.getConfig().getBoolean("squid.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -276,9 +343,12 @@ public class Monster_Methods {
     public void pigEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.PIG);
 	if (plugin.getConfig().getBoolean("pig.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -289,9 +359,12 @@ public class Monster_Methods {
     public void sheepEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.SHEEP);
 	if (plugin.getConfig().getBoolean("sheep.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -302,9 +375,12 @@ public class Monster_Methods {
     public void enderdragonEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.ENDER_DRAGON);
 	if (plugin.getConfig().getBoolean("enderdragon.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -315,9 +391,12 @@ public class Monster_Methods {
     public void giantEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.GIANT);
 	if (plugin.getConfig().getBoolean("giant.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -328,9 +407,12 @@ public class Monster_Methods {
     public void ghastEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.GHAST);
 	if (plugin.getConfig().getBoolean("ghast.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -354,9 +436,12 @@ public class Monster_Methods {
     public void snowmanEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.SNOWMAN);
 	if (plugin.getConfig().getBoolean("snowman.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
@@ -366,14 +451,46 @@ public class Monster_Methods {
     public void villagerEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.VILLAGER);
 	if (plugin.getConfig().getBoolean("villager.enable") && m != null) {
-	    entity.getWorld().playEffect(entity.getLocation(),
-		    Effect.STEP_SOUND, (int) m);
-	    entity.playEffect(EntityEffect.HURT);
+	    for(Entity nearby: entity.getNearbyEntities(5, 5, 5)){
+		if(nearby instanceof Player){
+		    Player p = (Player)nearby;
+		    sendPacket(p, getBloodPacket(entity.getLocation(),m));
+		}
+	    }
 	} else if (m == null) {
 	    plugin.getLogger().severe(
 		    "[Bleed] enumMap is null. Please report this!");
 	    plugin.getLogger().severe("[Bleed] EntityType: VILLAGER");
 	}
+    }
+
+    public Packet getBloodPacket(Location loc, int id){
+	if(Integer.valueOf(plugin.getServer().getBukkitVersion().split(Pattern.quote("."))[0]) == 1){
+	    if(Integer.valueOf(plugin.getServer().getBukkitVersion().split(Pattern.quote("."))[1]) >= 7 ){
+		Packet packet = new Packet("PacketPlayOutWorldEvent");
+		packet.setField("a", 2001);
+		packet.setField("b", loc.getX());
+		packet.setField("c", loc.getY());
+		packet.setField("d", loc.getZ());
+		packet.setField("d", id);
+		packet.setField("f", false);
+		return packet;
+	    }else if(Integer.valueOf(plugin.getServer().getBukkitVersion().split(Pattern.quote("."))[1]) <= 6 ){
+		Packet packet = new Packet("Packet61WorldEvent");
+		packet.setField("a", 2001);
+		packet.setField("b", loc.getX());
+		packet.setField("c", loc.getY());
+		packet.setField("d", loc.getZ());
+		packet.setField("d", id);
+		packet.setField("f", false);
+		return packet;
+	    }
+	}
+	return null;
+    }
+
+    public void sendPacket(Player player, Packet packet){
+	PlayerUtil.sendPacket(player, packet);
     }
 
 }

@@ -144,17 +144,21 @@ public class Bleed extends JavaPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String CommandLabel,String[] args){
 	if(cmd.getName().equalsIgnoreCase("bleed")){
-	    if(sender instanceof Player){
-		Player p = (Player)sender;
-		if(p.hasPermission("bleed.toggle")){
-		    if(args[0].equalsIgnoreCase("toggle")){
-			toggle(p);
-			return true;
-		    }else if(args[0].equalsIgnoreCase("status")){
-			p.sendMessage(status());
-			return true;
+	    if(args.length == 1){
+		if(sender instanceof Player){
+		    Player p = (Player)sender;
+		    if(p.hasPermission("bleed.toggle")){
+			if(args[0].equalsIgnoreCase("toggle")){
+			    toggle(p);
+			    return true;
+			}else if(args[0].equalsIgnoreCase("status")){
+			    p.sendMessage(status());
+			    return true;
+			}
 		    }
 		}
+	    }else{	
+		return false;
 	    }
 
 	}
