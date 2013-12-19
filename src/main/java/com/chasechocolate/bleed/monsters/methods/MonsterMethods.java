@@ -13,11 +13,12 @@ import com.chasechocolate.bleed.Bleed;
 import com.chasechocolate.bleed.packets.Packet;
 import com.chasechocolate.bleed.packets.PlayerUtil;
 
-public class Monster_Methods {
+public class MonsterMethods {
 
     private final Bleed plugin;
+    private final String packetString;
 
-    public Monster_Methods(Bleed plugin) {
+    public MonsterMethods(Bleed plugin) {
 	this.plugin = plugin;
     }
     public void horseEffect(Entity entity) {
@@ -464,33 +465,36 @@ public class Monster_Methods {
 	}
     }
 
-    public Packet getBloodPacket(Location loc, int id){
-	if(Integer.valueOf(plugin.getServer().getBukkitVersion().split(Pattern.quote("."))[0]) == 1){
-	    if(Integer.valueOf(plugin.getServer().getBukkitVersion().split(Pattern.quote("."))[1]) >= 7 ){
-		Packet packet = new Packet("PacketPlayOutWorldEvent");
-		packet.setField("a", 2001);
-		packet.setField("b", loc.getX());
-		packet.setField("c", loc.getY());
-		packet.setField("d", loc.getZ());
-		packet.setField("d", id);
-		packet.setField("f", false);
-		return packet;
-	    }else if(Integer.valueOf(plugin.getServer().getBukkitVersion().split(Pattern.quote("."))[1]) <= 6 ){
-		Packet packet = new Packet("Packet61WorldEvent");
-		packet.setField("a", 2001);
-		packet.setField("b", loc.getX());
-		packet.setField("c", loc.getY());
-		packet.setField("d", loc.getZ());
-		packet.setField("d", id);
-		packet.setField("f", false);
-		return packet;
-	    }
-	}
-	return null;
+    String bukkitVersion = plugin.getServer().getBukkitVersion();
+    String parts[] = bukkitVersion.split(Pattern.quote("."));
+
+    int major = Integer.valueOf(parts[0]);
+    int minor = Integer.valueOf(parts[1]);
+
+    if (major == 1) {
+	packetString = (minor >= 7) ? "PacketPlayOutWorldEvent": "Packet61WorldEvent";
+    } else {
+	packetString = null;
     }
 
+    //...
+
+    public Packet getBloodPacket(Location loc, int id){
+	if (packetString == null) {
+	    return null;
+	}
+	Packet packet = new Packet(packetString);
+	packet.setField("a", 2001);
+	packet.setField("b", loc.getX());
+	packet.setField("c", loc.getY());
+	packet.setField("d", loc.getZ());
+	packet.setField("d", id);
+	packet.setField("f", false);
+	return packet;
+    }	
     public void sendPacket(Player player, Packet packet){
 	PlayerUtil.sendPacket(player, packet);
     }
 
+}
 }

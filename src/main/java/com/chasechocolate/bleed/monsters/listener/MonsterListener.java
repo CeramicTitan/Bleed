@@ -11,11 +11,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 import com.chasechocolate.bleed.Bleed;
-import com.chasechocolate.bleed.monsters.methods.Monster_Methods;
+import com.chasechocolate.bleed.monsters.methods.MonsterMethods;
 
 public class MonsterListener implements Listener {
 
-    private Monster_Methods methods;
+    private MonsterMethods methods;
     private final Bleed plugin;
 
     public MonsterListener(Bleed plugin) {
@@ -36,7 +36,7 @@ public class MonsterListener implements Listener {
 	if(event.getEntity().getLocation().getBlock().isLiquid()){
 	    return;
 	}
-	methods = new Monster_Methods(plugin);
+	methods = new MonsterMethods(plugin);
 	switch (event.getEntity().getType()) {
 
 	case HORSE:
