@@ -20,7 +20,19 @@ public class MonsterMethods {
 
     public MonsterMethods(Bleed plugin) {
 	this.plugin = plugin;
+	String bukkitVersion = plugin.getServer().getBukkitVersion();
+	String parts[] = bukkitVersion.split(Pattern.quote("."));
+
+	int major = Integer.valueOf(parts[0]);
+	int minor = Integer.valueOf(parts[1]);
+
+	if (major == 1) {
+	    packetString = (minor >= 7) ? "PacketPlayOutWorldEvent": "Packet61WorldEvent";
+	} else {
+	    packetString = null;
+	}
     }
+
     public void horseEffect(Entity entity) {
 	Integer m = plugin.enumMap.get(EntityType.HORSE);
 	if (plugin.getConfig().getBoolean("player.enable") && m != null) {
@@ -465,21 +477,8 @@ public class MonsterMethods {
 	}
     }
 
-    String bukkitVersion = plugin.getServer().getBukkitVersion();
-    String parts[] = bukkitVersion.split(Pattern.quote("."));
-
-    int major = Integer.valueOf(parts[0]);
-    int minor = Integer.valueOf(parts[1]);
-
-    if (major == 1) {
-	packetString = (minor >= 7) ? "PacketPlayOutWorldEvent": "Packet61WorldEvent";
-    } else {
-	packetString = null;
-    }
-
-    //...
-
     public Packet getBloodPacket(Location loc, int id){
+
 	if (packetString == null) {
 	    return null;
 	}
@@ -495,6 +494,4 @@ public class MonsterMethods {
     public void sendPacket(Player player, Packet packet){
 	PlayerUtil.sendPacket(player, packet);
     }
-
-}
 }
