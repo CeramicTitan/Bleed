@@ -2,6 +2,7 @@ package com.chasechocolate.bleed.monsters.methods;
 
 import java.util.regex.Pattern;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -20,7 +21,7 @@ public class MonsterMethods {
 
     public MonsterMethods(Bleed plugin) {
 	this.plugin = plugin;
-	String bukkitVersion = plugin.getServer().getBukkitVersion();
+	String bukkitVersion = Bukkit.getServer().getBukkitVersion();
 	String parts[] = bukkitVersion.split(Pattern.quote("."));
 
 	int major = Integer.valueOf(parts[0]);
@@ -30,7 +31,7 @@ public class MonsterMethods {
 	    packetString = (minor >= 7) ? "PacketPlayOutWorldEvent": "Packet61WorldEvent";
 	} else {
 	    packetString = null;
-	}
+	} 
     }
 
     public void horseEffect(Entity entity) {
@@ -484,9 +485,9 @@ public class MonsterMethods {
 	}
 	Packet packet = new Packet(packetString);
 	packet.setField("a", 2001);
-	packet.setField("b", loc.getX());
-	packet.setField("c", loc.getY());
-	packet.setField("d", loc.getZ());
+	packet.setField("b", loc.getBlockX());
+	packet.setField("c", loc.getBlockY());
+	packet.setField("d", loc.getBlockZ());
 	packet.setField("d", id);
 	packet.setField("f", false);
 	return packet;

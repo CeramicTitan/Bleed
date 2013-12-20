@@ -1,6 +1,6 @@
 name: Bleed
 main: com.chasechocolate.bleed.Bleed
-version: 5
+version: 5.5
 description: >
              Blood particles for pvp/pve.
 commands:
