@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 public class PlayerUtil {
 
+
     public static void sendPacket(Player player, Object packet){
 	Method sendPacket = ReflectionUtil.getMethod(ReflectionUtil.getNMSClass("PlayerConnection"), "sendPacket", ReflectionUtil.getNMSClass("Packet"));
 	Object playerConnection = getPlayerConnection(player);
@@ -15,7 +16,6 @@ public class PlayerUtil {
 	    sendPacket.invoke(playerConnection, packet);
 	} catch (Exception e) {
 	    Bukkit.getLogger().warning("Failed to retrieve the PlayerConnection of: " + player.getName());
-	    e.printStackTrace();
 	}
     }
 
@@ -42,4 +42,6 @@ public class PlayerUtil {
 	    return null;
 	}
     }
+
+
 }

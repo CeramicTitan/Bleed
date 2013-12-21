@@ -15,9 +15,11 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.chasechocolate.bleed.monsters.listener.MonsterListener;
+import com.chasechocolate.bleed.monsters.methods.MonsterMethods;
 
 public class Bleed extends JavaPlugin {
     public Map<EntityType, Integer> enumMap = new EnumMap<EntityType, Integer>(EntityType.class);
+    public MonsterMethods methods = new MonsterMethods(this);
     private MonsterListener mListener = null;
     public boolean enabled;
 
